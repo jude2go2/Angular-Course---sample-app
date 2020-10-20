@@ -1,3 +1,7 @@
 <p>Movies Component Added With Cli</p>
+<button (click)="handleToggleClick()">Toggle Movie</button>
+<button (click)="handleChangeTextClick()" [disabled]="!isMovieVisible">
+  Change Text
+</button>
 
-<app-movie></app-movie>
+<app-movie *ngIf="isMovieVisible" [text]="movieName"></app-movie>

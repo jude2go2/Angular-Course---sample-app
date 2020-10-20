@@ -25,9 +25,8 @@ export class MovieComponent implements OnInit, AfterViewInit {
     console.log('On Destroy');
   }
 
-  gOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges) {
     //Used to do specific actions on Input Changes
-    // WILL NOT WORK
     console.log('On Changes', changes);
   }
 }

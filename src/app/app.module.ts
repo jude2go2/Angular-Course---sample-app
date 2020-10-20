@@ -3,11 +3,15 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MovieComponent } from './components/movie/movie.component';
+import { CliMoviesComponent } from './components/cli-movies/cli-movies.component';
 
 @NgModule({
   declarations: [
     // for components
     AppComponent,
+    MovieComponent,
+    CliMoviesComponent,
   ],
   imports: [
     // for modules

@@ -1,0 +1,15 @@
+<div class="template-syntax">
+  {{ movieName }}
+
+  <button (click)="onButtonClick($event)" [disabled]="isDisabled">
+    Change Movie
+  </button>
+  <br />
+  <input type="text" [(ngModel)]="movieName" />
+
+  <button (dblclick)="onDbClick()">Double Click Button change name</button>
+  <div [style.font-size]="'26px'" [ngClass]="{ disabled: isDisabled }">
+    Directed By {{ movieObj.director?.firstName }}
+    <!-- ? is The safe navigation operator -->
+  </div>
+</div>

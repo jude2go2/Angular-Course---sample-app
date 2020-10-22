@@ -1,16 +1,23 @@
-<div>
-  <h1>Helloo World! we are in {{ title }}</h1>
+<div class="app">
+  <div>
+    <h1>Helloo World! we are in {{ title }}</h1>
 
-  <div class="shopping-list" *ngIf="list.length">
-    <h2>today we are going to buy:</h2>
-    <ul>
-      <li *ngFor="let item of list">{{ item }}</li>
-    </ul>
+    <div class="shopping-list" *ngIf="list.length">
+      <h2>today we are going to buy:</h2>
+      <ul>
+        <li *ngFor="let item of list">{{ item }}</li>
+      </ul>
+    </div>
   </div>
+  <div class="seperator"></div>
+  <h2>Generate Components</h2>
+  <app-cli-movies></app-cli-movies>
+
+  <div class="seperator"></div>
+  <h2>Template Syntax</h2>
+  <app-template-syntax> </app-template-syntax>
+
+  <div class="seperator"></div>
+  <h2>Directives</h2>
+  <app-directives></app-directives>
 </div>
-
-<app-cli-movies></app-cli-movies>
-<br />
-<br />
-
-<app-template-syntax> </app-template-syntax>

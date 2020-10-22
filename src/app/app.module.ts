@@ -7,6 +7,7 @@ import { MovieComponent } from './components/movie/movie.component';
 import { CliMoviesComponent } from './components/cli-movies/cli-movies.component';
 import { TemplateSyntaxComponent } from './components/template-syntax/template-syntax.component';
 import { FormsModule } from '@angular/forms';
+import { DirectivesComponent } from './components/directives/directives.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { FormsModule } from '@angular/forms';
     MovieComponent,
     CliMoviesComponent,
     TemplateSyntaxComponent,
+    DirectivesComponent,
   ],
   imports: [
     // for modules

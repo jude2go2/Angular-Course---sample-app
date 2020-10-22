@@ -1,32 +1,30 @@
-import { SimpleChanges } from '@angular/core';
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
+export interface IMovie {
+  id: number;
+  name: string;
+  mainChar: string;
+  rating: number;
+  isInTheater: boolean;
+}
 
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
   styleUrls: ['./movie.component.scss'],
 })
-export class MovieComponent implements OnInit, AfterViewInit {
+export class MovieComponent implements OnInit {
   constructor() {}
-  @Input() text: string;
+  @Input() movie: IMovie;
+
+  @Output() removeMovie: EventEmitter<number> = new EventEmitter();
 
   ngOnInit(): void {
     //Used when starting up the component
     console.log('On Init');
   }
 
-  ngAfterViewInit(): void {
-    // used after the component is initialized and we need something from it
-    console.log('After View Init');
-  }
-
-  ngOnDestroy() {
-    //Used when the component is removed from the DOM usually for unsubscribing
-    console.log('On Destroy');
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    //Used to do specific actions on Input Changes
-    console.log('On Changes', changes);
+  public onRemoveMovie(id: number): void {
+    this.removeMovie.emit(id);
   }
 }

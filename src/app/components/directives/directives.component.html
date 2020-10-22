@@ -3,21 +3,12 @@
     {{ movie }}
   </div>
   <div class="list-item" *ngFor="let movie of listOfMovies; let i = index">
-    <div
+    <app-movie
       class="item-wrap"
       *ngIf="movie.rating > 1"
-      [ngStyle]="{ background: movie.rating > 8 ? '#98ff70' : '#fa7575' }"
+      [movie]="movie"
+      (removeMovie)="onRemoveMovie($event)"
     >
-      <div [ngSwitch]="movie.mainChar">
-        <div *ngSwitchCase="'Bruce Banner'">
-          {{ movie.name }}
-        </div>
-        <div *ngSwitchDefault>
-          <div class="title">Movie Name: {{ movie.name }}, index: {{ i }}</div>
-          <div class="charecter">Main Charecter: {{ movie.mainChar }}</div>
-          <div class="rating">Rating: {{ movie.rating }}</div>
-        </div>
-      </div>
-    </div>
+    </app-movie>
   </div>
 </div>

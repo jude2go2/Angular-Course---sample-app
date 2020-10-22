@@ -1,1 +1,11 @@
-<p>{{ text }}</p>
+<div
+  class="movie-container"
+  *ngIf="!!movie"
+  [ngStyle]="{ background: movie.rating > 8 ? '#98ff70' : '#fa7575' }"
+>
+  <div class="title">Movie Name: {{ movie.name }}</div>
+  <div class="charecter">Main Charecter: {{ movie.mainChar }}</div>
+  <div class="rating">Rating: {{ movie.rating }}</div>
+
+  <button (click)="onRemoveMovie(movie.id)">Remove Movie</button>
+</div>

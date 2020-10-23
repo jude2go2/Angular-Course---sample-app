@@ -1,0 +1,46 @@
+<h2>Template Drive Forms</h2>
+
+<form (ngSubmit)="onSubmit(form)" #form="ngForm">
+  <div class="form-control">
+    <input
+      type="text"
+      ngModel
+      name="movieName"
+      required
+      placeholder="Movie Name"
+    />
+
+    <div
+      class="err-name"
+      *ngIf="form.submitted && form.controls.movieName.status === 'INVALID'"
+    >
+      Bad Movie Name
+    </div>
+  </div>
+  <div class="form-control">
+    <input
+      type="text"
+      ngModel
+      name="mainChar"
+      required
+      placeholder="Main Charecter"
+    />
+  </div>
+  <div class="form-control">
+    <input type="number" ngModel name="rating" required placeholder="Rating" />
+  </div>
+
+  <button type="submit">Submit New Movie</button>
+
+  <div class="general-error" *ngIf="form.submitted && !form.valid">
+    Something is missing
+  </div>
+</form>
+
+<div class="movies-wrap">
+  <app-movie
+    *ngFor="let movie of movies; let i = index"
+    [movie]="movie"
+    (removeMovie)="onRemoveMovie(i)"
+  ></app-movie>
+</div>

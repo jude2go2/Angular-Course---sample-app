@@ -1,0 +1,41 @@
+<h2>Reactive Forms</h2>
+
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <div class="form-control">
+    <input type="text" formControlName="movieName" placeholder="Movie Name" />
+
+    <div
+      class="movie-name-error--length"
+      *ngIf="form.touched && !!form.controls.movieName.errors?.minlength"
+    >
+      Not Enought Charecters
+    </div>
+    <div
+      class="movie-name-error--reuired"
+      *ngIf="form.touched && !!form.controls.movieName.errors?.required"
+    >
+      Required
+    </div>
+  </div>
+  <div class="form-control">
+    <input
+      type="text"
+      formControlName="mainChar"
+      placeholder="Main Charecter"
+    />
+  </div>
+  <div class="form-control">
+    <input type="number" formControlName="rating" placeholder="Rating" />
+    <div class="rating-err" *ngIf="form.sub">Rating Error</div>
+  </div>
+
+  <button type="submit">Submit New Movie</button>
+</form>
+
+<div class="movies-wrap">
+  <app-movie
+    *ngFor="let movie of movies; let i = index"
+    [movie]="movie"
+    (removeMovie)="onRemoveMovie(i)"
+  ></app-movie>
+</div>

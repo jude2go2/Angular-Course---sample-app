@@ -5,7 +5,7 @@ export interface IMovie {
   name: string;
   mainChar: string;
   rating: number;
-  isInTheater: boolean;
+  isInTheater?: boolean;
 }
 
 @Component({

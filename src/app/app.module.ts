@@ -8,6 +8,9 @@ import { CliMoviesComponent } from './components/cli-movies/cli-movies.component
 import { TemplateSyntaxComponent } from './components/template-syntax/template-syntax.component';
 import { FormsModule } from '@angular/forms';
 import { DirectivesComponent } from './components/directives/directives.component';
+import { RecativeFormsComponent } from './components/recative-forms/recative-forms.component';
+import { TemplateDrivenFormsComponent } from './components/template-driven-forms/template-driven-forms.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,8 @@ import { DirectivesComponent } from './components/directives/directives.componen
     CliMoviesComponent,
     TemplateSyntaxComponent,
     DirectivesComponent,
+    RecativeFormsComponent,
+    TemplateDrivenFormsComponent,
   ],
   imports: [
     // for modules
@@ -24,6 +29,7 @@ import { DirectivesComponent } from './components/directives/directives.componen
     AppRoutingModule,
     //import the forms module
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [], // for dependency injection
   bootstrap: [AppComponent], // startup

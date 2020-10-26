@@ -1,53 +1,60 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, Subject, timer } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { IMovie } from '../components/movie/movie.component';
+
+import { mock_data } from './MOCK_DATA';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MovieService {
   constructor() {}
-  private movies: IMovie[] = [
-    {
-      id: 1,
-      name: 'ironman',
-      mainChar: 'Tory Stark',
-      rating: 8.5,
-      isInTheater: false,
-    },
-    {
-      id: 2,
-      name: 'The Hulk',
-      mainChar: 'Bruce Banner',
-      rating: 6.8,
-      isInTheater: true,
-    },
-    {
-      id: 3,
-      name: 'Doctor Starnge',
-      mainChar: 'Steven Strange',
-      rating: 9.3,
-      isInTheater: false,
-    },
-    {
-      id: 4,
-      name: 'Spiderman',
-      mainChar: 'Peter Parker',
-      rating: 8.1,
-      isInTheater: true,
-    },
-  ];
+  private page: number = 1;
+
+  private movieSubject$: BehaviorSubject<Array<IMovie>> = new BehaviorSubject(
+    []
+  );
+
   public random = (Math.random() * 1000).toFixed(0);
 
   public getRandom(): number {
     return parseInt(this.random);
   }
 
-  public getMovies(): Array<IMovie> {
-    return this.movies;
+  public fetchMovies() {
+    setTimeout(() => {
+      this.movieSubject$.next(mock_data);
+    }, 3000);
+  }
+
+  public getAllMovies(): Observable<Array<IMovie>> {
+    return this.movieSubject$.asObservable();
+  }
+
+  public getMovies(): Observable<Array<IMovie>> {
+    //pager logic
+    let page: number = this.page * 10;
+    let start = this.page === 1 ? 0 : page - 10;
+    let end = page;
+    this.page++;
+    return this.movieSubject$.pipe(
+      map((movies) => {
+        return movies.slice(start, end);
+      })
+    );
   }
 
   public removeMovie(id: number): void {
-    const index = this.movies.findIndex((movie) => movie.id === id);
-    this.movies.splice(index, 1);
+    const index = this.movieSubject$.value.findIndex(
+      (movie) => movie.id === id
+    );
+    // this.movies.splice(index, 1);
+    // send AJAX request to server to delete movie
+
+    setTimeout(() => {
+      mock_data.splice(index, 1);
+      this.movieSubject$.next(mock_data);
+    }, 3000);
   }
 }

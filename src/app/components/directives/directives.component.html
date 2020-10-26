@@ -1,7 +1,4 @@
 <div class="list-container" *ngIf="listOfMovies.length">
-  <div class="list-item" *ngFor="let movie of list">
-    {{ movie }}
-  </div>
   <div class="list-item" *ngFor="let movie of listOfMovies; let i = index">
     <app-movie
       class="item-wrap"
@@ -12,3 +9,4 @@
     </app-movie>
   </div>
 </div>
+<button (click)="getMoreMovies()">Get More Movies</button>

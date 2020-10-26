@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from 'src/app/services/movie.service';
+import { IMovie } from '../movie/movie.component';
 
 @Component({
   selector: 'app-directives',
@@ -16,10 +17,25 @@ export class DirectivesComponent implements OnInit {
     'Spiderman',
   ];
 
-  public listOfMovies: Array<any> = [];
+  public listOfMovies: Array<IMovie> = [];
 
   ngOnInit(): void {
-    this.listOfMovies = this._movieService.getMovies();
+    this._movieService.fetchMovies();
+    this._movieService.getMovies().subscribe((data) => {
+      console.log(data);
+      this.listOfMovies = data;
+    });
+    console.log(
+      'Radom from Directive Component',
+      this._movieService.getRandom()
+    );
+  }
+
+  public getMoreMovies() {
+    this._movieService.getMovies().subscribe((data) => {
+      console.log(data);
+      this.listOfMovies = [...this.listOfMovies, ...data];
+    });
     console.log(
       'Radom from Directive Component',
       this._movieService.getRandom()

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
   selector: 'app-directives',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./directives.component.scss'],
 })
 export class DirectivesComponent implements OnInit {
-  constructor() {}
+  constructor(private _movieService: MovieService) {}
 
   public list: Array<string> = [
     'Iron Man',
@@ -15,38 +16,15 @@ export class DirectivesComponent implements OnInit {
     'Spiderman',
   ];
 
-  public listOfMovies: Array<any> = [
-    {
-      id: 1,
-      name: 'ironman',
-      mainChar: 'Tory Stark',
-      rating: 8.5,
-      isInTheater: false,
-    },
-    {
-      id: 2,
-      name: 'The Hulk',
-      mainChar: 'Bruce Banner',
-      rating: 6.8,
-      isInTheater: true,
-    },
-    {
-      id: 3,
-      name: 'Doctor Starnge',
-      mainChar: 'Steven Strange',
-      rating: 9.3,
-      isInTheater: false,
-    },
-    {
-      id: 4,
-      name: 'Spiderman',
-      mainChar: 'Peter Parker',
-      rating: 8.1,
-      isInTheater: true,
-    },
-  ];
+  public listOfMovies: Array<any> = [];
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.listOfMovies = this._movieService.getMovies();
+    console.log(
+      'Radom from Directive Component',
+      this._movieService.getRandom()
+    );
+  }
 
   public onRemoveMovie(id: number): void {
     // this.listOfMovies = this.listOfMovies.filter((movie) => movie.id !== id);

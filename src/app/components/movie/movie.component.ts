@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MovieService } from 'src/app/services/movie.service';
 
 export interface IMovie {
   id: number;
@@ -14,17 +15,18 @@ export interface IMovie {
   styleUrls: ['./movie.component.scss'],
 })
 export class MovieComponent implements OnInit {
-  constructor() {}
+  constructor(private _movieService: MovieService) {}
   @Input() movie: IMovie;
 
   @Output() removeMovie: EventEmitter<number> = new EventEmitter();
 
   ngOnInit(): void {
     //Used when starting up the component
-    console.log('On Init');
+    console.log('Random from Movie Component', this._movieService.getRandom());
   }
 
   public onRemoveMovie(id: number): void {
-    this.removeMovie.emit(id);
+    // this.removeMovie.emit(id);
+    this._movieService.removeMovie(id);
   }
 }

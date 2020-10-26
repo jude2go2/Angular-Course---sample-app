@@ -23,6 +23,8 @@
 
    -->
   <div class="seperator"></div>
+  <button (click)="toggleMovies = !toggleMovies">Toggle Movies</button>
+  <div class="seperator"></div>
   <h2>Directives</h2>
-  <app-directives></app-directives>
+  <app-directives *ngIf="toggleMovies"></app-directives>
 </div>

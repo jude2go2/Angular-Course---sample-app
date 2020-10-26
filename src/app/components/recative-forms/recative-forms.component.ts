@@ -25,7 +25,6 @@ export class RecativeFormsComponent implements OnInit {
 
   public onSubmit(): void {
     this.form.markAllAsTouched();
-    console.log(this.form);
     if (this.form.valid) {
       const movie: IMovie = {
         id: Math.floor(Math.random() * 100),

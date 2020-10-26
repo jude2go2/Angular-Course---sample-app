@@ -15,6 +15,7 @@ export class MovieService {
   private movieSubject$: BehaviorSubject<Array<IMovie>> = new BehaviorSubject(
     []
   );
+  private allMovies$: BehaviorSubject<Array<IMovie>> = new BehaviorSubject([]);
 
   public random = (Math.random() * 1000).toFixed(0);
 
@@ -24,7 +25,7 @@ export class MovieService {
 
   public fetchMovies() {
     setTimeout(() => {
-      this.movieSubject$.next(mock_data);
+      this.allMovies$.next(mock_data);
     }, 3000);
   }
 
@@ -34,15 +35,26 @@ export class MovieService {
 
   public getMovies(): Observable<Array<IMovie>> {
     //pager logic
-    let page: number = this.page * 10;
-    let start = this.page === 1 ? 0 : page - 10;
-    let end = page;
-    this.page++;
-    return this.movieSubject$.pipe(
-      map((movies) => {
-        return movies.slice(start, end);
-      })
-    );
+    setInterval(() => {
+      let page: number = this.page * 10;
+      let start = this.page === 1 ? 0 : page - 10;
+      let end = page;
+      this.page++;
+      let currentMovies = this.movieSubject$.value;
+      debugger;
+      const nextMovies = this.allMovies$.value.slice(start, end);
+      this.movieSubject$.next([...currentMovies, ...nextMovies]);
+    }, 5000);
+    // let page: number = this.page * 10;
+    // let start = this.page === 1 ? 0 : page - 10;
+    // let end = page;
+    // this.page++;
+    // return this.movieSubject$.pipe(
+    //   map((movies) => {
+    //     return movies.slice(start, end);
+    //   })
+    // );
+    return this.movieSubject$;
   }
 
   public removeMovie(id: number): void {

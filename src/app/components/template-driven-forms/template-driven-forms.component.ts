@@ -24,8 +24,6 @@ export class TemplateDrivenFormsComponent implements OnInit {
       };
       this.movies.push(movie);
     }
-
-    console.log(form);
   }
 
   public onRemoveMovie(i: number) {

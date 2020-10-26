@@ -9,5 +9,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'myApp';
 
+  public toggleMovies: boolean = true;
+
   public list: Array<string> = ['eggs', 'Mangos', 'Pineapples'];
 }

@@ -22,7 +22,6 @@ export class MovieComponent implements OnInit {
 
   ngOnInit(): void {
     //Used when starting up the component
-    console.log('Random from Movie Component', this._movieService.getRandom());
   }
 
   public onRemoveMovie(id: number): void {

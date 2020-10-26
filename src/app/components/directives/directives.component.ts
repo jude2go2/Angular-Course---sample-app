@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { MovieService } from 'src/app/services/movie.service';
 import { IMovie } from '../movie/movie.component';
 
@@ -7,7 +8,10 @@ import { IMovie } from '../movie/movie.component';
   templateUrl: './directives.component.html',
   styleUrls: ['./directives.component.scss'],
 })
-export class DirectivesComponent implements OnInit {
+export class DirectivesComponent implements OnInit, OnDestroy {
+  public displayMovies: boolean = true;
+  private subscription: Subscription = new Subscription();
+
   constructor(private _movieService: MovieService) {}
 
   public list: Array<string> = [
@@ -21,25 +25,22 @@ export class DirectivesComponent implements OnInit {
 
   ngOnInit(): void {
     this._movieService.fetchMovies();
-    this._movieService.getMovies().subscribe((data) => {
-      console.log(data);
-      this.listOfMovies = data;
-    });
-    console.log(
-      'Radom from Directive Component',
-      this._movieService.getRandom()
+    this.subscription.add(
+      this._movieService.getMovies().subscribe((data) => {
+        this.listOfMovies = data;
+        console.count('still getting movies');
+      })
     );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   public getMoreMovies() {
     this._movieService.getMovies().subscribe((data) => {
-      console.log(data);
       this.listOfMovies = [...this.listOfMovies, ...data];
     });
-    console.log(
-      'Radom from Directive Component',
-      this._movieService.getRandom()
-    );
   }
 
   public onRemoveMovie(id: number): void {

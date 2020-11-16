@@ -1,0 +1,17 @@
+<div
+  *ngIf="!!movie"
+  class="movie-container"
+  [ngStyle]="{ border: movie.rating > 8 ? '1px solid green' : '1px solid red' }"
+  [ngClass]="{ 'good-movie': movie.rating > 8 }"
+>
+  <span [ngSwitch]="movie.type">
+    <p *ngSwitchCase="movieTypeEnum.Action">Action</p>
+    <p *ngSwitchCase="movieTypeEnum.Drama">Drama</p>
+    <p *ngSwitchDefault>Hero Movie</p>
+  </span>
+
+  <h1>{{ movie.name | uppercase }}</h1>
+  <p>Main Charechter: {{ movie.mainChar }}</p>
+  <p>Rating: {{ movie.rating }}</p>
+  <p>Release: {{ movie.releaseDate | date }}</p>
+</div>
